@@ -1,28 +1,26 @@
 import { useAuth } from "../context/AuthProvider";
+import ListItem from "./ListItem.jsx";
 import Sidebar from "./Sidebar.jsx";
 import Video from "./Video";
 
 function Home() {
-  const { data,loading } = useAuth();
-  console.log(data)
-
+  const { data, loading } = useAuth();
+  console.log(data);
 
   return (
-    <div className="flex">
+    <div className="flex mt-16">
       <Sidebar />
-      <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5">
+      <div className="h-[calc(100vh-4.225rem)] w-[90%] overflow-y-scroll overflow-x-hidden">
+        <ListItem></ListItem>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-5">
           {!loading &&
-            data?.
-            contents
-            .map((item) => {
+            data.map((item) => {
               if (item.type !== "video") return false;
               return <Video key={item.id} video={item?.video}></Video>;
             })}
         </div>
-       
       </div>
     </div>
-  )
+  );
 }
 export default Home;

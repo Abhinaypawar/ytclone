@@ -17,7 +17,7 @@ export default function AuthProvider({ children }) {
     setLoading(true);
     try {
       const contents = await fetchData(`search/?q=${query}`);
-      setData(contents);
+      setData(contents.contents);
       console.log(contents)
     } catch (error) {
       console.error("Error fetching data:", error);
